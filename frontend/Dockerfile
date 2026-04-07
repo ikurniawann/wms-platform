@@ -16,11 +16,10 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-# Create public directory if it doesn't exist
+# Create public directory
 RUN mkdir -p public
 
-# Copy built application
-COPY --from=builder /app/public ./public 2>/dev/null || true
+# Copy built application (public is optional)
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
