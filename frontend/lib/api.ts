@@ -1,63 +1,110 @@
 // lib/api.ts
-// API client configuration
+// API client untuk WMS Platform
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
 
-export interface ApiResponse<T = unknown> {
-  success: boolean;
-  data?: T;
+interface ApiResponse<T> {
+  data: T;
   message?: string;
-  meta?: {
-    page?: number;
-    page_size?: number;
-    total?: number;
-    total_pages?: number;
-  };
 }
 
-export async function fetchApi<T>(
-  endpoint: string,
-  options?: RequestInit
-): Promise<ApiResponse<T>> {
-  const url = `${API_BASE_URL}${endpoint}`;
-  
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...options?.headers,
-    },
-  });
+interface Product {
+  id: string;
+  sku: string;
+  name: string;
+  description: string;
+  category: string;
+  price: number;
+  cost: number;
+  unit: string;
+  barcode: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
 
+interface ProductListResponse {
+  products: Product[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
+interface CreateProductRequest {
+  sku: string;
+  name: string;
+  description: string;
+  category: string;
+  price: number;
+  cost: number;
+  unit: string;
+  barcode: string;
+}
+
+// Helper untuk handle response
+async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status}`);
+    const error = await response.json().catch(() => ({ message: 'Unknown error' }));
+    throw new Error(error.message || `HTTP ${response.status}`);
   }
-
   return response.json();
 }
 
-// Products API
-export const productsApi = {
-  list: (page = 1, pageSize = 20) =>
-    fetchApi(`/api/v1/products?page=${page}&page_size=${pageSize}`),
-  
-  get: (id: string) =>
-    fetchApi(`/api/v1/products/${id}`),
-  
-  create: (data: unknown) =>
-    fetchApi("/api/v1/products", {
-      method: "POST",
+// Product API
+export const productApi = {
+  // Get all products
+  getProducts: async (page = 1, limit = 10): Promise<ProductListResponse> => {
+    const response = await fetch(`${API_BASE_URL}/products?page=${page}&limit=${limit}`);
+    return handleResponse(response);
+  },
+
+  // Get single product
+  getProduct: async (id: string): Promise<Product> => {
+    const response = await fetch(`${API_BASE_URL}/products/${id}`);
+    return handleResponse(response);
+  },
+
+  // Create product
+  createProduct: async (data: CreateProductRequest): Promise<Product> => {
+    const response = await fetch(`${API_BASE_URL}/products`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }),
-  
-  update: (id: string, data: unknown) =>
-    fetchApi(`/api/v1/products/${id}`, {
-      method: "PUT",
+    });
+    return handleResponse(response);
+  },
+
+  // Update product
+  updateProduct: async (id: string, data: Partial<CreateProductRequest>): Promise<Product> => {
+    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }),
-  
-  delete: (id: string) =>
-    fetchApi(`/api/v1/products/${id}`, {
-      method: "DELETE",
-    }),
+    });
+    return handleResponse(response);
+  },
+
+  // Delete product
+  deleteProduct: async (id: string): Promise<void> => {
+    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
+      method: 'DELETE',
+    });
+    return handleResponse(response);
+  },
+
+  // Search products
+  searchProducts: async (query: string): Promise<ProductListResponse> => {
+    const response = await fetch(`${API_BASE_URL}/products/search?q=${encodeURIComponent(query)}`);
+    return handleResponse(response);
+  },
 };
+
+// Health check
+export const healthApi = {
+  check: async (): Promise<{ status: string; version: string; modules: string[] }> => {
+    const response = await fetch('http://localhost:8080/health');
+    return handleResponse(response);
+  },
+};
+
+export type { Product, ProductListResponse, CreateProductRequest };
