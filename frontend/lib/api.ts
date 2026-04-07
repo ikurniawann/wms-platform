@@ -1,7 +1,11 @@
 // lib/api.ts
 // API client untuk WMS Platform
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 
+  (typeof window !== 'undefined' 
+    ? 'http://localhost:8080/api/v1'  // Browser (client-side)
+    : 'http://backend:8080/api/v1'    // Server (Docker internal)
+  );
 
 interface ApiResponse<T> {
   data: T;

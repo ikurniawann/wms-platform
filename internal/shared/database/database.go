@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/ikurniawann/wms-platform/internal/product/model"
 	"github.com/ikurniawann/wms-platform/internal/shared/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -42,8 +43,7 @@ func Migrate(db *gorm.DB) error {
 	log.Println("Running database migrations...")
 	
 	// Import all models for migration
-	// This will be auto-generated
 	return db.AutoMigrate(
-	// Models will be added here
+		&model.Product{},
 	)
 }
