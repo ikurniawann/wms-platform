@@ -1,105 +1,95 @@
-# WMS Platform
+# 🏭 WMS Platform - Warehouse Management System
 
-Modern Warehouse Management System with Modular Monolith Architecture
+> **✅ ACTIVE REPOSITORY** - Modular Monolith Architecture
+
+[![Go](https://img.shields.io/badge/Go-1.21-blue)](https://golang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue)](https://docker.com/)
+
+A modern Warehouse Management System with clean architecture, ready for scale.
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# Clone
+git clone https://github.com/ikurniawann/wms-platform.git
+cd wms-platform
+
+# Run everything
+docker-compose up -d
+
+# Access
+Frontend: http://localhost:3000
+Backend:  http://localhost:8080
+Health:   http://localhost:8080/health
+```
+
+---
 
 ## 🏗️ Architecture
 
 ```
 wms-platform/
-├── backend/           # Go Modular Monolith
-│   ├── cmd/
-│   │   ├── api/      # HTTP API Server
-│   │   └── worker/   # Background Worker
-│   └── internal/
-│       ├── product/  # Product Module
-│       ├── order/    # Order Module
-│       ├── inventory/# Inventory Module
-│       ├── customer/ # Customer Module
-│       └── shared/   # Shared components
-├── frontend/         # Next.js 14
-└── infra/           # Docker & K8s configs
+├── 📁 backend/           # Go Backend
+│   ├── 📁 cmd/
+│   │   ├── 📄 api/       # HTTP Server entry point
+│   │   └── 📄 worker/    # Background worker
+│   └── 📁 internal/
+│       ├── 📁 product/   ✅ Full module
+│       ├── 📁 order/     ⏳ Stub
+│       ├── 📁 inventory/ ⏳ Stub
+│       └── 📁 customer/  ⏳ Stub
+├── 📁 frontend/          # Next.js 14
+└── 📄 docker-compose.yml # Full stack
 ```
 
-## 🚀 Quick Start
+---
 
-### Prerequisites
-- Docker & Docker Compose
-- Go 1.21+
-- Node.js 18+
+## 📊 Tech Stack
 
-### Run with Docker Compose
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 14 + TypeScript + Tailwind |
+| Backend | Go 1.21 + Gin + GORM |
+| Database | PostgreSQL 15 |
+| Cache | Redis 7 |
+| Container | Docker + Docker Compose |
 
-```bash
-# Clone and start
-$ git clone https://github.com/ikurniawann/wms-platform.git
-$ cd wms-platform
-$ docker-compose up -d
+---
 
-# Services:
-# - Frontend: http://localhost:3000
-# - Backend API: http://localhost:8080
-# - Health: http://localhost:8080/health
-```
+## 🔄 Module Status
 
-### Development
+| Module | Status | Description |
+|--------|--------|-------------|
+| Product | ✅ Full | CRUD + Search + Pagination |
+| Order | ⏳ Stub | Routes ready, needs implementation |
+| Inventory | ⏳ Stub | Routes ready, needs implementation |
+| Customer | ⏳ Stub | Routes ready, needs implementation |
 
-```bash
-# Backend
-cd backend
-cp .env.example .env
-go mod tidy
-go run cmd/api/main.go
+---
 
-# Frontend
-cd frontend
-npm install
-npm run dev
-```
+## 📁 Previous Version
 
-## 📚 API Documentation
+**Old Repository (Archived):** [wms-backend](https://github.com/ikurniawann/wms-backend)
 
-- Health: `GET /health`
-- Products: `GET /api/v1/products`
-- Orders: `GET /api/v1/orders`
-- Inventory: `GET /api/v1/inventory/stocks`
+- Phase 1-3: Monolithic architecture
+- Phase 4: **This repo** - Modular Monolith
 
-## 🔐 Authentication
+---
 
-JWT-based authentication. Include token in header:
-```
-Authorization: Bearer <token>
-```
+## 🎯 Roadmap
 
-## 📦 Modules
+- [ ] Complete Order module
+- [ ] Complete Inventory module
+- [ ] Complete Customer module
+- [ ] Add authentication (JWT)
+- [ ] Frontend API integration
+- [ ] Background jobs (worker)
 
-| Module | Endpoints | Description |
-|--------|-----------|-------------|
-| Product | `/api/v1/products` | Products, variants, categories |
-| Order | `/api/v1/orders` | Sales & purchase orders |
-| Inventory | `/api/v1/inventory` | Stock, movements, adjustments |
-| Customer | `/api/v1/customers` | Customers, suppliers, groups |
+---
 
-## 🛠️ Tech Stack
-
-**Backend:**
-- Go 1.21
-- Gin Framework
-- GORM
-- PostgreSQL
-- JWT Authentication
-
-**Frontend:**
-- Next.js 14
-- TypeScript
-- Tailwind CSS
-- React Query
-- Zustand
-
-**Infrastructure:**
-- Docker
-- Docker Compose
-- Redis (caching)
-
-## 📄 License
+## 📜 License
 
 MIT
