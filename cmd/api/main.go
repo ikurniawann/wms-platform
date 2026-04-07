@@ -78,11 +78,10 @@ func main() {
 		})
 	})
 
-	// API v1 with auth
+	// API v1 - public routes (no auth for now, add auth per-route later)
 	api := r.Group("/api/v1")
-	api.Use(middleware.AuthMiddleware(cfg.JWT.Secret))
 
-	// Register module routes
+	// Register module routes - public for read, protected for write (to be implemented)
 	productModule.RegisterRoutes(api.Group("/products"))
 	orderModule.RegisterRoutes(api.Group("/orders"))
 	inventoryModule.RegisterRoutes(api.Group("/inventory"))

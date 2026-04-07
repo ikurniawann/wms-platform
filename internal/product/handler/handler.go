@@ -23,11 +23,14 @@ func New(svc *service.Service) *Handler {
 
 // RegisterRoutes registers product routes
 func (h *Handler) RegisterRoutes(r *gin.RouterGroup) {
+	// Public routes (no auth)
 	r.GET("", h.ListProducts)
-	r.POST("", h.CreateProduct)
 	r.GET("/:id", h.GetProduct)
-	r.PUT("/:id", h.UpdateProduct)
-	r.DELETE("/:id", h.DeleteProduct)
+	
+	// Protected routes (with auth) - will add middleware later
+	// r.POST("", h.CreateProduct)
+	// r.PUT("/:id", h.UpdateProduct)
+	// r.DELETE("/:id", h.DeleteProduct)
 }
 
 // ListProducts handles GET /products
