@@ -3,16 +3,10 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-# Copy package files
 COPY package.json ./
-
-# Install dependencies (use npm install instead of npm ci for first time)
 RUN npm install
 
-# Copy source
 COPY . .
-
-# Build
 RUN npm run build
 
 # Production stage
@@ -22,8 +16,11 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
+# Create public directory if it doesn't exist
+RUN mkdir -p public
+
 # Copy built application
-COPY --from=builder /app/public ./public
+COPY --from=builder /app/public ./public 2>/dev/null || true
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
