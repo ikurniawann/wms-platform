@@ -1,17 +1,7 @@
 {
-  "name": "wms-frontend",
-  "version": 3,
+  "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "installCommand": "npm install",
-  "framework": "nextjs",
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://api.wms-platform.com/api/:path*"
-    }
-  ],
-  "env": {
-    "NEXT_PUBLIC_API_URL": "@next_public_api_url"
-  }
+  "framework": "nextjs"
 }
