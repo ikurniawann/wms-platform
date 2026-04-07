@@ -53,9 +53,14 @@ async function handleResponse<T>(response: Response): Promise<T> {
 // Product API
 export const productApi = {
   // Get all products
-  getProducts: async (page = 1, limit = 10): Promise<ProductListResponse> => {
-    const response = await fetch(`${API_BASE_URL}/products?page=${page}&limit=${limit}`);
-    return handleResponse(response);
+  getProducts: async (page = 1, limit = 10): Promise<{ products: Product[]; total: number; meta: any }> => {
+    const response = await fetch(`${API_BASE_URL}/products?page=${page}&page_size=${limit}`);
+    const result = await handleResponse(response);
+    return {
+      products: result.data || [],
+      total: result.meta?.total || 0,
+      meta: result.meta,
+    };
   },
 
   // Get single product
