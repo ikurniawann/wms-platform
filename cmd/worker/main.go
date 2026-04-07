@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/ikurniawann/wms-platform/backend/internal/shared/config"
-	"github.com/ikurniawann/wms-platform/backend/internal/shared/database"
+	"github.com/ikurniawann/wms-platform/internal/shared/config"
+	"github.com/ikurniawann/wms-platform/internal/shared/database"
 	"github.com/joho/godotenv"
 )
 

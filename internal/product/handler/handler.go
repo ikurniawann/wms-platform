@@ -8,7 +8,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/ikurniawann/wms-platform/backend/internal/product/service"
+	"github.com/ikurniawann/wms-platform/internal/product/service"
 )
 
 // Handler for product HTTP requests

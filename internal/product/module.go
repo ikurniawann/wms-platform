@@ -5,9 +5,9 @@ package product
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/ikurniawann/wms-platform/backend/internal/product/handler"
-	"github.com/ikurniawann/wms-platform/backend/internal/product/repository"
-	"github.com/ikurniawann/wms-platform/backend/internal/product/service"
+	"github.com/ikurniawann/wms-platform/internal/product/handler"
+	"github.com/ikurniawann/wms-platform/internal/product/repository"
+	"github.com/ikurniawann/wms-platform/internal/product/service"
 	"gorm.io/gorm"
 )
 

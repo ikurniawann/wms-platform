@@ -9,13 +9,13 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/ikurniawann/wms-platform/backend/internal/shared/config"
-	"github.com/ikurniawann/wms-platform/backend/internal/shared/database"
-	"github.com/ikurniawann/wms-platform/backend/internal/customer"
-	"github.com/ikurniawann/wms-platform/backend/internal/inventory"
-	"github.com/ikurniawann/wms-platform/backend/internal/order"
-	"github.com/ikurniawann/wms-platform/backend/internal/product"
-	"github.com/ikurniawann/wms-platform/backend/middleware"
+	"github.com/ikurniawann/wms-platform/internal/shared/config"
+	"github.com/ikurniawann/wms-platform/internal/shared/database"
+	"github.com/ikurniawann/wms-platform/internal/customer"
+	"github.com/ikurniawann/wms-platform/internal/inventory"
+	"github.com/ikurniawann/wms-platform/internal/order"
+	"github.com/ikurniawann/wms-platform/internal/product"
+	"github.com/ikurniawann/wms-platform/middleware"
 	"github.com/joho/godotenv"
 )
 

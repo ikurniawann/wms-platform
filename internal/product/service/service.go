@@ -6,8 +6,8 @@ package service
 import (
 	"context"
 
-	"github.com/ikurniawann/wms-platform/backend/internal/product/model"
-	"github.com/ikurniawann/wms-platform/backend/internal/product/repository"
+	"github.com/ikurniawann/wms-platform/internal/product/model"
+	"github.com/ikurniawann/wms-platform/internal/product/repository"
 )
 
 // Service contains business logic

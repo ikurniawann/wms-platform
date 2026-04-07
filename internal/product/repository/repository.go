@@ -6,7 +6,7 @@ package repository
 import (
 	"context"
 
-	"github.com/ikurniawann/wms-platform/backend/internal/product/model"
+	"github.com/ikurniawann/wms-platform/internal/product/model"
 	"gorm.io/gorm"
 )
 
