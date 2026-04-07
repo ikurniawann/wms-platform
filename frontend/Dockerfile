@@ -3,9 +3,11 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-# Install dependencies
-COPY package*.json ./
-RUN npm ci
+# Copy package files
+COPY package.json ./
+
+# Install dependencies (use npm install instead of npm ci for first time)
+RUN npm install
 
 # Copy source
 COPY . .
