@@ -1,16 +1,21 @@
 // internal/customer/module.go
-// Customer module stub
+// Customer module
 
 package customer
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+)
 
 // Module for customers
-type Module struct{}
+type Module struct {
+	db *gorm.DB
+}
 
 // NewModule creates customer module
-func NewModule(db interface{}) *Module {
-	return &Module{}
+func NewModule(db *gorm.DB) *Module {
+	return &Module{db: db}
 }
 
 // RegisterRoutes registers routes

@@ -29,7 +29,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
-	defer db.Close()
+	defer database.Close(db)
 
 	log.Println("✅ Worker database connected!")
 	log.Println("🔄 Background worker starting...")

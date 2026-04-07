@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ikurniawann/wms-platform/backend/internal/shared/config"
+	"github.com/ikurniawann/wms-platform/internal/shared/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

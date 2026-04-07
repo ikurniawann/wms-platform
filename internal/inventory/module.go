@@ -1,16 +1,21 @@
 // internal/inventory/module.go
-// Inventory module stub
+// Inventory module
 
 package inventory
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+)
 
 // Module for inventory
-type Module struct{}
+type Module struct {
+	db *gorm.DB
+}
 
 // NewModule creates inventory module
-func NewModule(db interface{}) *Module {
-	return &Module{}
+func NewModule(db *gorm.DB) *Module {
+	return &Module{db: db}
 }
 
 // RegisterRoutes registers routes

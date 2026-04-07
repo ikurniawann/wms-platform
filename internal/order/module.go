@@ -1,16 +1,21 @@
 // internal/order/module.go
-// Order module stub
+// Order module
 
 package order
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+)
 
 // Module for orders
-type Module struct{}
+type Module struct {
+	db *gorm.DB
+}
 
 // NewModule creates order module
-func NewModule(db interface{}) *Module {
-	return &Module{}
+func NewModule(db *gorm.DB) *Module {
+	return &Module{db: db}
 }
 
 // RegisterRoutes registers routes

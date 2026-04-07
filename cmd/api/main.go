@@ -6,7 +6,6 @@ package main
 import (
 	"flag"
 	"log"
-	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ikurniawann/wms-platform/internal/shared/config"
@@ -38,7 +37,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
-	defer db.Close()
+	defer database.Close(db)
 
 	log.Println("✅ Database connected!")
 
